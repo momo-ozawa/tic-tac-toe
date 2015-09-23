@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Beer</title>
+  <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+  <link rel="stylesheet" href="css/styles.css" type="text/css">
+  <script src="js/jquery-1.11.3.js"></script>
+  <script src="js/sprintf.js"></script>
+  <script src="js/scripts.js"></script>
+  <script>
+    $(function(){
+        var $select = $("#1-99");
+        for (i=1;i<=99;i++){
+            $select.append($('<option></option>').val(i).html(i))
+        }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>99 Bottles of Beer</h1>
+    <br>
+    <form id="beer" class="form-inline"> 
+      <div class="form-group">
+        <label for="year">Number of beers:</label>
+        <select id="1-99" class="form-control"></select>
+      </div>
+
+      &nbsp;
+
+      <button type="submit" class="btn btn-inverse">Here we go...</button>
+    </form>
+    
+    <hr>
+    
+    <div id="result">
+      <ul class="list-unstyled"></ul>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mocha spec runner</title>
+  <link rel="stylesheet" href="mocha.css">
+</head>
+<body>
+  <div id="mocha"></div>
+  <script src="../js/jquery-1.11.3.js"></script>
+  <script src="../js/sprintf.js"></script>
+  <script src="../js/scripts.js"></script>
+  <script src="mocha.js"></script>
+  <script src="chai.js"></script>
+  <script>mocha.setup("bdd");</script>
+  <script src="specs.js"></script>
+  <script>
+    expect = chai.expect;
+    mocha.checkLeaks();
+    mocha.globals(["jquery"]);
+    mocha.run();
+  </script>
+</body>
+</html>
