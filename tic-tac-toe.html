@@ -6,37 +6,35 @@
   <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
   <link rel="stylesheet" href="css/styles.css" type="text/css">
   <script src="js/jquery-1.11.3.js"></script>
-  <script src="js/sprintf.js"></script>
   <script src="js/scripts.js"></script>
-  <script>
-    $(function(){
-        var $select = $("#1-99");
-        for (i=1;i<=99;i++){
-            $select.append($('<option></option>').val(i).html(i))
-        }
-    });
-  </script>
 </head>
 <body>
   <div class="container">
-    <h1>99 Bottles of Beer</h1>
-    <br>
-    <form id="beer" class="form-inline"> 
-      <div class="form-group">
-        <label for="year">Number of beers:</label>
-        <select id="1-99" class="form-control"></select>
+    <h1>Tic Tac Toe</h1>
+
+    <!-- Put line break here for clarity -->
+    <hr>
+
+    <div id="board">
+        <table>
+          <tr id="row1">
+            <td class="square" id="0,0"></td>
+            <td class="square v"></td>
+            <td class="square"></td>
+          </tr>
+          <tr id="row2">
+            <td class="square h"></td>
+            <td class="square v h"></td>
+            <td class="square h"></td>
+          </tr>
+          <tr id="row3">
+            <td class="square"></td>
+            <td class="square v"></td>
+            <td class="square"></td>
+          </tr>
+        </table>
       </div>
 
-      &nbsp;
-
-      <button type="submit" class="btn btn-inverse">Here we go...</button>
-    </form>
-    
-    <hr>
-    
-    <div id="result">
-      <ul class="list-unstyled"></ul>
-    </div>
   </div>
 </body>
 </html>
