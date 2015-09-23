@@ -1,9 +1,13 @@
+/* PLAYER */
+
 describe('Player', function() {
   it("returns the player's mark", function() {
     var testPlayer = new Player('X');
     expect(testPlayer.mark).to.equal('X');
   });
 });
+
+/* SPACE */
 
 describe('Space', function() {
   it("returns the space's x-coordinate", function() {
@@ -23,6 +27,8 @@ describe('Space', function() {
     expect(testSpace.markedBy).to.eql(testPlayer);
   });
 });
+
+/* BOARD */
 
 describe('Board', function() {
   it("creates 9 spaces when initialized", function() {
@@ -56,4 +62,41 @@ describe('Board', function() {
     ]
     expect(testBoard.groups()).to.eql(expectedBoardArray);
   });
+
+  it("returns true if a player has three marks in a row", function() {
+    var testBoard = new Board();
+    var testPlayer = new Player('X');
+    testBoard.find(0,0).takenBy(testPlayer);
+    testBoard.find(0,1).takenBy(testPlayer);
+    testBoard.find(0,2).takenBy(testPlayer);
+    expect(testBoard.threeInARow()).to.equal(true);
+  });
+
+  it("returns false if no player has three marks in a row", function() {
+    var testBoard = new Board();
+    var testPlayer = new Player('X');
+    testBoard.find(0,0).takenBy(testPlayer);
+    testBoard.find(0,1).takenBy(testPlayer);
+    expect(testBoard.threeInARow()).to.equal(false);
+  });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
