@@ -2,9 +2,13 @@
  * JAVASCRIPT
  */
 
+/* PLAYER */
+
 function Player(mark) {
   this.mark = mark;
 }
+
+/* SPACE */
 
 function Space(xCoordinate, yCoordinate) {
   this.xCoordinate = xCoordinate;
@@ -15,6 +19,8 @@ function Space(xCoordinate, yCoordinate) {
 Space.prototype.takenBy = function(player) {
   this.markedBy = player;
 }
+
+/* BOARD */
 
 function Board() {
   // Initialize a 3 x 3 array of spaces
@@ -35,7 +41,7 @@ Board.prototype.find = function(xCoordinate, yCoordinate) {
 Board.prototype.groups = function() {
   // Groups consist of rows, columns, and diagonals
   // ***Comes into use for Game.prototype.isGameOver***
-  groups = [];
+  var groups = [];
 
   // Add rows to groups
   groups.push([this.find(0,0).markedBy, this.find(0,1).markedBy, this.find(0,2).markedBy]);
@@ -65,6 +71,8 @@ Board.prototype.threeInARow = function() {
   return false;
 }
 
+/* GAME*/
+
 function Game() {
   this.board = new Board();
   this.player1 = new Player('X');
@@ -86,22 +94,8 @@ Game.prototype.isGameOver = function() {
 }
 
 
-/**
- * JQUERY
- */
 
-$(document).ready(function() {
-  $('form#beer').submit(function(event) {
-    var beerNumber = parseInt($('select#1-99').val());
-    var songArray = beerSongArray(beerNumber);
 
-    $("ul").empty();
 
-    for (var i = 0; i < songArray.length; i++) {
-      $("ul").append("<li>" + songArray[i] + "</li>");
-    }
 
-    $('#result').show();
-    event.preventDefault();
-  });
-});
+
