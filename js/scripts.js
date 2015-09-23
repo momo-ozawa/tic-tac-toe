@@ -2,18 +2,36 @@
  * JAVASCRIPT
  */
 
-var beerSongArray = function(n) {
-  var beerSong = beerOnTheWall(n);
-  return beerSong.split(";");
+function Player(mark) {
+  this.mark = mark;
 }
 
-var beerOnTheWall = function(n) {
-  if (n === 0) {
-    return "No more bottles of beer on the wall, no more bottles of beer. Go to the store and buy some more, 99 bottles of beer on the wall.";
-  } else {
-    var chant = sprintf("%1$d bottles of beer on the wall, %1$d bottles of beer. Take one down and pass it around, %2$d bottles of beer on the wall.", n, n-1);
-    return chant + ";" + beerOnTheWall(n - 1);
+function Space(xCoordinate, yCoordinate) {
+  this.xCoordinate = xCoordinate;
+  this.yCoordinate = yCoordinate;
+  this.markedBy;
+} 
+
+Space.prototype.takenBy = function(player) {
+  this.markedBy = player;
+}
+
+function Board() {
+  var boardArray = [];
+  for (var rowIndex = 0; rowIndex < 3; rowIndex++) {
+    var rowArray = [];
+    for (var colIndex = 0; colIndex < 3; colIndex++) {
+      rowArray.push(new Space(rowIndex, colIndex));
+    }
+    boardArray.push(rowArray);
   }
+  return boardArray;
+}
+
+function Game() {
+  var board = Board();
+  var player1 = Player('X');
+  var player2 = Player('O');
 }
 
 /**
