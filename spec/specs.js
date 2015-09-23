@@ -81,6 +81,15 @@ describe('Board', function() {
   });
 });
 
+/* GAME */
+
+describe('Game', function() {
+  it("returns correct current player", function() {
+    var testGame = new Game();
+    var testPlayer = new Player('X');
+    expect(testGame.currentPlayer).to.eql(testPlayer);
+  });
+});
 
 
 
