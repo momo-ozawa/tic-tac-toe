@@ -95,6 +95,19 @@ describe('Game', function() {
     testGame.switchPlayer();
     expect(testGame.currentPlayer).to.eql(testGame.player2);
   });
+
+  it("returns true if game is over", function() {
+    var testGame = new Game();
+    testGame.board.find(0,0).takenBy(testGame.player1);
+    testGame.board.find(0,1).takenBy(testGame.player1);
+    testGame.board.find(0,2).takenBy(testGame.player1);
+    expect(testGame.isGameOver()).to.equal(true);
+  });
+
+  it("returns false if game is not over", function() {
+    var testGame = new Game();
+    expect(testGame.isGameOver()).to.equal(false);
+  });
 });
 
 
