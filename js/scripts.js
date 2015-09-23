@@ -4,6 +4,7 @@
 
 function Player(mark) {
   this.mark = mark;
+  this.winner = false;
 }
 
 function Space(xCoordinate, yCoordinate) {
@@ -28,8 +29,8 @@ function Board() {
   }
 }
 
-Board.prototype.find = function(x, y) {
-  return this.board[x][y];
+Board.prototype.find = function(xCoordinate, yCoordinate) {
+  return this.board[xCoordinate][yCoordinate];
 }
 
 Board.prototype.groups = function() {
@@ -38,33 +39,27 @@ Board.prototype.groups = function() {
   groups = [];
 
   // Add rows to groups
-  groups.push([this.board[0][0].takenBy(), this.board[0][1].takenBy(), this.board[0][2].takenBy()]);
+  groups.push([this.find(0,0).markedBy, this.find(0,1).markedBy, this.find(0,2).markedBy]);
+  groups.push([this.find(1,0).markedBy, this.find(1,1).markedBy, this.find(1,2).markedBy]);
+  groups.push([this.find(2,0).markedBy, this.find(2,1).markedBy, this.find(2,2).markedBy]);
 
   // Add columns to groups
-  groups.push([this.board[0][0].takenBy(), this.board[1][0].takenBy(), this.board[2][0].takenBy()]);
-  groups.push([this.board[0][1].takenBy(), this.board[1][1].takenBy(), this.board[2][1].takenBy()]);
-  groups.push([this.board[0][2].takenBy(), this.board[1][2].takenBy(), this.board[2][2].takenBy()]);
+  groups.push([this.find(0,0).markedBy, this.find(1,0).markedBy, this.find(2,0).markedBy]);
+  groups.push([this.find(0,1).markedBy, this.find(1,1).markedBy, this.find(2,1).markedBy]);
+  groups.push([this.find(0,2).markedBy, this.find(1,2).markedBy, this.find(2,2).markedBy]);
 
   // Add diagonals to groups
-  groups.push([this.board[0][0].takenBy(), this.board[1][1].takenBy(), this.board[2][2].takenBy()]);
-  groups.push([this.board[2][0].takenBy(), this.board[1][1].takenBy(), this.board[0][2].takenBy()]);
+  groups.push([this.find(0,0).markedBy, this.find(1,1).markedBy, this.find(2,2).markedBy]);
+  groups.push([this.find(2,0).markedBy, this.find(1,1).markedBy, this.find(0,2).markedBy]);
 
   return groups;
 }
 
-function filterOutUndefined(array) {
-  var filteredArray = array.filter(
-    function(element) {return element !== undefined}
-  );
-  return filteredArray;
-}
-
 Board.prototype.threeInARow = function() {
-  var groups = this.board.groups();
-  for (group in groups) {
-    var filteredGroup = filterOutUndefined(group);
-    var markSet = new Set(filteredGroup);
-    if (markSet.size === 1) {
+  var groups = this.groups();
+  for (var i = 0; i < groups.length; i++) {
+    var markSet = new Set(groups[i]);
+    if (markSet.size === 1 && !(markSet.has(undefined))) {
       return true;
     }
   }
@@ -87,6 +82,7 @@ Game.prototype.switchPlayer = function() {
 }
 
 Game.prototype.isGameOver = function() {
+  return this.board.threeInARow();
 }
 
 

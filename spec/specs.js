@@ -38,5 +38,6 @@ describe('Board', function() {
   it("finds and returns a space by its coordinates", function() {
     var testBoard = new Board();
     expect(testBoard.find(0,0)).to.eql(new Space(0,0));
-  })
-})
+  });
+
+});
