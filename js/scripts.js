@@ -4,7 +4,6 @@
 
 function Player(mark) {
   this.mark = mark;
-  this.winner = false;
 }
 
 function Space(xCoordinate, yCoordinate) {
@@ -70,6 +69,7 @@ function Game() {
   this.board = new Board();
   this.player1 = new Player('X');
   this.player2 = new Player('O');
+  this.winner = undefined;
   this.currentPlayer = this.player1; 
 }
 
