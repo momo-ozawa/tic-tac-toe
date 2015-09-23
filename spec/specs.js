@@ -23,3 +23,14 @@ describe('Space', function() {
     expect(testSpace.markedBy).to.eql(testPlayer);
   });
 });
+
+describe('Board', function() {
+  it("creates 9 spaces when initialized", function() {
+    var expectedBoardArray = [
+      [new Space(0,0), new Space(0,1), new Space(0, 2)],
+      [new Space(1,0), new Space(1,1), new Space(1, 2)],
+      [new Space(2,0), new Space(2,1), new Space(2, 2)]
+    ];
+  expect(new Board()).to.eql(expectedBoardArray);
+  })
+})
