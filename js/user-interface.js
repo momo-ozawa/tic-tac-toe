@@ -1,4 +1,9 @@
 /**
+ * JAVASCRIPT
+ */
+
+
+/**
  * JQUERY
  */
  
@@ -8,7 +13,10 @@ $(document).ready(function() {
   var game = new Game();
 
   $('.square').click(function() {
-    $(this).text(game.currentPlayer.mark);
-    game.switchPlayer();
+    if (!($(this).hasClass('marked'))) {
+      $(this).text(game.currentPlayer.mark);
+      $(this).addClass('marked');
+      game.switchPlayer();
+    }
   });
 });
