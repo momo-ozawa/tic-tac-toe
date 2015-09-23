@@ -46,7 +46,7 @@ describe('Board', function() {
     expect(testBoard.find(0,0)).to.eql(new Space(0,0));
   });
 
-  it("creates groups", function() {
+  it("creates and returns groups with correct info", function() {
     var testBoard = new Board();
     var testPlayer = new Player('X');
     testBoard.find(0,0).takenBy(testPlayer);
@@ -88,6 +88,12 @@ describe('Game', function() {
     var testGame = new Game();
     var testPlayer = new Player('X');
     expect(testGame.currentPlayer).to.eql(testPlayer);
+  });
+
+  it("switches players", function() {
+    var testGame = new Game();
+    testGame.switchPlayer();
+    expect(testGame.currentPlayer).to.eql(testGame.player2);
   });
 });
 
