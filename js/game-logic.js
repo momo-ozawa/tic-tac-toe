@@ -94,6 +94,18 @@ Game.prototype.isThreeInARow = function() {
   return false;
 }
 
+Game.prototype.isAllMarked = function() {
+  var groups = this.board.groups();
+  for (var i = 0; i < groups.length; i++) {
+    var markSet = new Set(groups[i]);
+    if (markSet.has(undefined)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// game is over is there is a winner or if there is a stale mate
 Game.prototype.isGameOver = function() {
   return this.isThreeInARow();
 }

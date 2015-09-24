@@ -94,6 +94,27 @@ describe('Game', function() {
     expect(testGame.isThreeInARow()).to.equal(false);
   });
 
+  it("'Game.isAllMarked()' returns true if it's a tie", function() {
+    var testGame = new Game();
+    testGame.board.find(0,0).takenBy(testGame.player1);
+    testGame.board.find(0,1).takenBy(testGame.player2);
+    testGame.board.find(0,2).takenBy(testGame.player1);
+    testGame.board.find(1,0).takenBy(testGame.player2);
+    testGame.board.find(1,1).takenBy(testGame.player1);
+    testGame.board.find(1,2).takenBy(testGame.player2);
+    testGame.board.find(2,0).takenBy(testGame.player1);
+    testGame.board.find(2,1).takenBy(testGame.player2);
+    testGame.board.find(2,2).takenBy(testGame.player1);
+    expect(testGame.isThreeInARow()).to.equal(true);
+  });
+
+  it("'Game.isAllMarked()' returns false if board still has unmarked spaces", function() {
+    var testGame = new Game();
+    testGame.board.find(0,0).takenBy(testGame.player1);
+    testGame.board.find(0,1).takenBy(testGame.player1);
+    expect(testGame.isThreeInARow()).to.equal(false);
+  });
+
   it("'Game.isGameOver()' returns true if game is over", function() {
     var testGame = new Game();
     testGame.board.find(0,0).takenBy(testGame.player1);
