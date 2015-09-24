@@ -2,12 +2,8 @@
  * JAVASCRIPT
  */
 
-function fadeInWhosTurn(currentGame) {
-  $('span#commentary').text(currentGame.currentPlayer.mark + "'s turn.").fadeIn().fadeOut().fadeIn();
-}
-
-function fadeOutWhosTurn() {
-  $('span#commentary').fadeOut();
+function showWhosTurn(currentGame) {
+  $('span#commentary').text(currentGame.currentPlayer.mark + "'s turn.").show();
 }
 
 function markSpaceAsTaken(currentGame, squareId) {
@@ -36,7 +32,7 @@ function gameOverActions(currentGame) {
 
   // Start new round
   currentGame.newRound();
-  fadeInWhosTurn(currentGame);
+  showWhosTurn(currentGame);
 }
 
 function clearBoard() {
@@ -53,10 +49,10 @@ $(document).ready(function() {
 
   // Initialize a new game
   var myGame = new Game();
-  fadeInWhosTurn(myGame);
+  showWhosTurn(myGame);
 
   $('.square').click(function() {
-    fadeOutWhosTurn();
+    // fadeOutWhosTurn();
     if (!($(this).hasClass('marked'))) {
       // Grab selected square's id
       var selectedSquareId = $(this).attr('id');
@@ -74,7 +70,7 @@ $(document).ready(function() {
         gameOverActions(myGame);
       } else {
         myGame.switchPlayer();
-        fadeInWhosTurn(myGame);
+        showWhosTurn(myGame);
       }
     }
   });
