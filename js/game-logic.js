@@ -81,13 +81,15 @@ Board.prototype.getRandomUnmarkedSpace = function(unmarkedSpaceArray) {
 
 /* GAME */
 
-function Game() {
+function Game(mode) {
   this.board = new Board();
   this.player1 = new Player('X');
   this.player2 = new Player('O');
   this.currentPlayer = this.player1;
   this.winner = undefined;
+  this.mode = mode;
 }
+
 
 Game.prototype.switchPlayer = function() {
   if (this.currentPlayer === this.player1) {

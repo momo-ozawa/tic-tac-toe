@@ -2,6 +2,48 @@
  * JAVASCRIPT
  */
 
+function playerTakesATurn(currentGame, square) {
+   if (!(square.hasClass('marked'))) {
+      // Grab selected square's id
+      var selectedSquareId = square.attr('id');
+
+      // Mark space in game.board as taken by current player
+      markSpaceAsTaken(currentGame, selectedSquareId);
+
+      // Mark a square on the web app
+      square.text(currentGame.currentPlayer.mark);
+      square.addClass('marked');
+
+      // Check if game is over; if not, switch player
+      if (currentGame.isGameOver()) {
+        gameOverActions(currentGame);
+      } else {
+        currentGame.switchPlayer();
+        showWhosTurn(currentGame);
+      }
+    }
+}
+
+function computerTakesATurn(currentGame) {
+  var unmarkedSquares = currentGame.board.getAllUnmarked();
+  var randomUnmarkedSquare = currentGame.board.getRandomUnmarkedSpace(unmarkedSquares);
+
+  // Mark space in game.board as taken by computer
+  randomUnmarkedSquare.takenBy(currentGame.player2);
+
+  // Mark a square in the web app
+  var squareId = randomUnmarkedSquare.xCoordinate.toString() + randomUnmarkedSquare.yCoordinate.toString();
+  $('#' + squareId).text(currentGame.currentPlayer.mark).addClass('marked').fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(200);
+
+  // Check if game is over; if not, switch player
+  if (currentGame.isGameOver()) {
+    gameOverActions(currentGame);
+  } else {
+    currentGame.switchPlayer();
+    showWhosTurn(currentGame);
+  }
+}
+
 function showWhosTurn(currentGame) {
   $('span#commentary').text(currentGame.currentPlayer.mark + "'s turn.").show();
 }
@@ -40,6 +82,10 @@ function clearBoard() {
   $('.square').text('');
 }
 
+function displayMode(mode) {
+  $('span#currentMode').text(mode);
+}
+
 
 /**
  * JQUERY
@@ -47,29 +93,34 @@ function clearBoard() {
  
 $(document).ready(function() {
 
-  // Initialize a new game
-  var myGame = new Game();
-  showWhosTurn(myGame);
+  var mode;
+  var currentPlayer; 
 
-  $('.square').click(function() {
-    if (!($(this).hasClass('marked'))) {
-      // Grab selected square's id
-      var selectedSquareId = $(this).attr('id');
+  $('#modeSubmit').click(function() {
+    mode = $('#whichMode').val();
+    displayMode(mode);
 
-      // Mark space in game.board as taken by current player
-      markSpaceAsTaken(myGame, selectedSquareId);
+    // Initialize a new game
+    var game = new Game(mode);
+    console.log(game)
 
-      // Mark a square on the web app
-      $(this).text(myGame.currentPlayer.mark);
-      $(this).addClass('marked');
+    showWhosTurn(game);
 
-      // Check if game is over; if not, switch player
-      if (myGame.isGameOver()) {
-        gameOverActions(myGame);
-      } else {
-        myGame.switchPlayer();
-        showWhosTurn(myGame);
-      }
+    if (mode === 'Player vs. Computer') {
+      $('.square').click(function() {
+        console.log(game.currentPlayer);
+        if (game.currentPlayer === game.player1) {
+          playerTakesATurn(game, $(this));
+        }
+      });
+
+      $(document).keypress(function(e) {
+        if (game.currentPlayer === game.player2) {
+          computerTakesATurn(game);
+        }
+      });
     }
+
   });
+
 });
