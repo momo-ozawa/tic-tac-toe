@@ -97,6 +97,8 @@ $(document).ready(function() {
   var currentPlayer; 
 
   $('#modeSubmit').click(function() {
+    $('#selectMode').hide();
+    $('#playGame').fadeIn();
     mode = $('#whichMode').val();
     displayMode(mode);
 
@@ -105,13 +107,15 @@ $(document).ready(function() {
 
     showWhosTurn(game);
 
-    if (mode === 'Player vs. Computer') {
+    if (mode === 'Player vs. Computer') {   
+      // Player
       $('.square').click(function() {
         if (game.currentPlayer === game.player1) {
           playerTakesATurn(game, $(this));
         }
       });
 
+      // Computer
       $(document).keypress(function(e) {
         if (game.currentPlayer === game.player2) {
           computerTakesATurn(game);
