@@ -74,6 +74,11 @@ Board.prototype.getAllUnmarked = function() {
   return unmarkedSpaces;
 }
 
+Board.prototype.getRandomUnmarkedSpace = function(unmarkedSpaceArray) {
+  var randomIndex = Math.floor(Math.random() * (unmarkedSpaceArray.length));
+  return unmarkedSpaceArray[randomIndex];
+}
+
 /* GAME */
 
 function Game() {

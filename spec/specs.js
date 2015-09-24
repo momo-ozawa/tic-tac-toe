@@ -67,6 +67,13 @@ describe('Board', function() {
     var testBoard = new Board();
     expect(testBoard.getAllUnmarked().length).to.equal(9);
   });
+
+  it("'Board.getRandomUnmarkedSpace(array) returns an unmarked space", function() {
+    var testBoard = new Board();
+    var unmarkedArray = testBoard.getAllUnmarked();
+    var randomUnmarkedSpace = testBoard.getRandomUnmarkedSpace(unmarkedArray);
+    expect(randomUnmarkedSpace.markedBy).to.equal(undefined);
+  })
 });
 
 /* GAME */
