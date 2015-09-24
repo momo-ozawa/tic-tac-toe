@@ -23,3 +23,7 @@
   height: 450px;
   text-align: center;
 }
+
+#commentary {
+  display: none;
+}
