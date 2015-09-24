@@ -62,6 +62,11 @@ describe('Board', function() {
     ]
     expect(testBoard.groups()).to.eql(expectedBoardArray);
   });
+
+  it("'Board.getAllUnmarked()' returns all unmarked spaces", function() {
+    var testBoard = new Board();
+    expect(testBoard.getAllUnmarked().length).to.equal(9);
+  });
 });
 
 /* GAME */
