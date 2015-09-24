@@ -52,12 +52,10 @@ $(document).ready(function() {
   showWhosTurn(myGame);
 
   $('.square').click(function() {
-    // fadeOutWhosTurn();
     if (!($(this).hasClass('marked'))) {
       // Grab selected square's id
       var selectedSquareId = $(this).attr('id');
-      console.log(selectedSquareId);
-     
+
       // Mark space in game.board as taken by current player
       markSpaceAsTaken(myGame, selectedSquareId);
 
