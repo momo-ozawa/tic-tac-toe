@@ -105,13 +105,17 @@ Game.prototype.isAllMarked = function() {
   return true;
 }
 
-// game is over is there is a winner or if there is a stale mate
 Game.prototype.isGameOver = function() {
-  return this.isThreeInARow();
+  // Game is over is there is a three in a row or if there is a stale mate
+  return (this.isThreeInARow() || (this.isAllMarked() && this.winner === undefined));
 }
 
-Game.prototype.winnerMessage = function() {
-  return this.winner.mark + ' wins!';
+Game.prototype.gameOverMessage = function() {
+  if (this.winner === undefined) {
+    return 'Tie game!';
+  } else {
+    return this.winner.mark + ' wins!';
+  }
 }
 
 
