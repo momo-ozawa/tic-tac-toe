@@ -82,7 +82,7 @@ function getFirstElementInSet(set) {
   return set.values().next().value;
 }
 
-Game.prototype.threeInARow = function() {
+Game.prototype.isThreeInARow = function() {
   var groups = this.board.groups();
   for (var i = 0; i < groups.length; i++) {
     var markSet = new Set(groups[i]);
@@ -95,7 +95,7 @@ Game.prototype.threeInARow = function() {
 }
 
 Game.prototype.isGameOver = function() {
-  return this.threeInARow();
+  return this.isThreeInARow();
 }
 
 Game.prototype.winnerMessage = function() {

@@ -1,7 +1,7 @@
 /* PLAYER */
 
 describe('Player', function() {
-  it("returns the player's mark", function() {
+  it("'Player.mark' returns the player's mark", function() {
     var testPlayer = new Player('X');
     expect(testPlayer.mark).to.equal('X');
   });
@@ -10,17 +10,17 @@ describe('Player', function() {
 /* SPACE */
 
 describe('Space', function() {
-  it("returns the space's x-coordinate", function() {
+  it("'Space.xCoordinate' returns the space's x-coordinate", function() {
     var testSpace = new Space(1,2);
     expect(testSpace.xCoordinate).to.equal(1);
   });
 
-  it("returns the space's y-coordinate", function() {
+  it("'Space.yCoordinate' returns the space's y-coordinate", function() {
     var testSpace = new Space(1,2);
     expect(testSpace.yCoordinate).to.equal(2);
   });
 
-  it("lets a player mark a space", function() {
+  it("'Space.takenBy(Player)' lets a player mark a space", function() {
     var testPlayer = new Player('X');
     var testSpace = new Space(1,2);
     testSpace.takenBy(testPlayer);
@@ -31,7 +31,7 @@ describe('Space', function() {
 /* BOARD */
 
 describe('Board', function() {
-  it("creates 9 spaces when initialized", function() {
+  it("'Board()' creates 9 spaces when initialized", function() {
     var testBoard = new Board();
     var expectedBoardArray = [
       [new Space(0,0), new Space(0,1), new Space(0, 2)],
@@ -41,12 +41,12 @@ describe('Board', function() {
   expect(testBoard.board).to.eql(expectedBoardArray);
   });
 
-  it("finds and returns a space by its coordinates", function() {
+  it("'Board.find(x,y)' finds and returns a space by its coordinates", function() {
     var testBoard = new Board();
     expect(testBoard.find(0,0)).to.eql(new Space(0,0));
   });
 
-  it("creates and returns groups with correct info", function() {
+  it("'Board.groups()'creates and returns groups with correct info", function() {
     var testBoard = new Board();
     var testPlayer = new Player('X');
     testBoard.find(0,0).takenBy(testPlayer);
@@ -67,34 +67,34 @@ describe('Board', function() {
 /* GAME */
 
 describe('Game', function() {
-  it("returns correct current player", function() {
+  it("'Game.currentPlayer' returns correct current player", function() {
     var testGame = new Game();
     var testPlayer = new Player('X');
     expect(testGame.currentPlayer).to.eql(testPlayer);
   });
 
-  it("switches players", function() {
+  it("'Game.switchPlayer()' switches players", function() {
     var testGame = new Game();
     testGame.switchPlayer();
     expect(testGame.currentPlayer).to.eql(testGame.player2);
   });
 
-  it("returns true if a player has three marks in a row", function() {
+  it("'Game.isThreeInARow()' returns true if a player has three marks in a row", function() {
     var testGame = new Game();
     testGame.board.find(0,0).takenBy(testGame.player1);
     testGame.board.find(0,1).takenBy(testGame.player1);
     testGame.board.find(0,2).takenBy(testGame.player1);
-    expect(testGame.threeInARow()).to.equal(true);
+    expect(testGame.isThreeInARow()).to.equal(true);
   });
 
-  it("returns false if no player has three marks in a row", function() {
+  it("'Game.isThreeInARow()' returns false if no player has three marks in a row", function() {
     var testGame = new Game();
     testGame.board.find(0,0).takenBy(testGame.player1);
     testGame.board.find(0,1).takenBy(testGame.player1);
-    expect(testGame.threeInARow()).to.equal(false);
+    expect(testGame.isThreeInARow()).to.equal(false);
   });
 
-  it("returns true if game is over", function() {
+  it("'Game.isGameOver()' returns true if game is over", function() {
     var testGame = new Game();
     testGame.board.find(0,0).takenBy(testGame.player1);
     testGame.board.find(0,1).takenBy(testGame.player1);
@@ -102,17 +102,17 @@ describe('Game', function() {
     expect(testGame.isGameOver()).to.equal(true);
   });
 
-  it("returns false if game is not over", function() {
+  it("'Game.isGameOver()' returns false if game is not over", function() {
     var testGame = new Game();
     expect(testGame.isGameOver()).to.equal(false);
   });
 
-  it("returns correct winner message", function() {
+  it("'Game.winnerMessage()' returns correct winner message", function() {
     var testGame = new Game();
     testGame.board.find(0,0).takenBy(testGame.player1);
     testGame.board.find(0,1).takenBy(testGame.player1);
     testGame.board.find(0,2).takenBy(testGame.player1);
-    testGame.threeInARow()
+    testGame.isThreeInARow();
     expect(testGame.winnerMessage()).to.equal('X wins!')
   });
 });
