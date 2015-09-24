@@ -2,11 +2,11 @@
  * JAVASCRIPT
  */
 
-function fadeInWhoGoesFirst(currentGame) {
-  $('span#commentary').text(currentGame.currentPlayer.mark + ' goes first this round.').fadeIn().fadeOut().fadeIn();
+function fadeInWhosTurn(currentGame) {
+  $('span#commentary').text(currentGame.currentPlayer.mark + "'s turn.").fadeIn().fadeOut().fadeIn();
 }
 
-function fadeOutWhoGoesFirst() {
+function fadeOutWhosTurn() {
   $('span#commentary').fadeOut();
 }
 
@@ -36,7 +36,7 @@ function gameOverActions(currentGame) {
 
   // Start new round
   currentGame.newRound();
-  fadeInWhoGoesFirst(currentGame);
+  fadeInWhosTurn(currentGame);
 }
 
 function clearBoard() {
@@ -53,10 +53,10 @@ $(document).ready(function() {
 
   // Initialize a new game
   var myGame = new Game();
-  fadeInWhoGoesFirst(myGame);
+  fadeInWhosTurn(myGame);
 
   $('.square').click(function() {
-    fadeOutWhoGoesFirst();
+    fadeOutWhosTurn();
     if (!($(this).hasClass('marked'))) {
       // Grab selected square's id
       var selectedSquareId = $(this).attr('id');
@@ -74,6 +74,7 @@ $(document).ready(function() {
         gameOverActions(myGame);
       } else {
         myGame.switchPlayer();
+        fadeInWhosTurn(myGame);
       }
     }
   });

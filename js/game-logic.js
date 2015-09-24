@@ -61,7 +61,7 @@ Board.prototype.groups = function() {
   return groups;
 }
 
-/* GAME*/
+/* GAME */
 
 function Game() {
   this.board = new Board();
@@ -98,7 +98,9 @@ Game.prototype.isThreeInARow = function() {
 
 Game.prototype.isAllMarked = function() {
   var groups = this.board.groups();
-  for (var i = 0; i < groups.length; i++) {
+  // Only look at rows; looking at columns and diagonals is redundant
+  // Hence, i < 3 and not i < markSet.length
+  for (var i = 0; i < 3 i++) {
     var markSet = new Set(groups[i]);
     if (markSet.has(undefined)) {
       return false;
