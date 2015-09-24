@@ -16,25 +16,41 @@
     <!-- Put line break here for clarity -->
     <hr>
 
-    <div id="board">
-        <table>
-          <tr id="row1">
-            <td class="square" id="00"></td>
-            <td class="square v" id="01"></td>
-            <td class="square" id="02"></td>
-          </tr>
-          <tr id="row2">
-            <td class="square h" id="10"></td>
-            <td class="square v h" id="11"></td>
-            <td class="square h" id="12"></td>
-          </tr>
-          <tr id="row3">
-            <td class="square" id="20"></td>
-            <td class="square v" id="21"></td>
-            <td class="square" id="22"></td>
-          </tr>
-        </table>
+    <div class="row">
+      
+      <!-- Board -->
+      <div class="col-md-6">
+        <div id="board">
+            <table>
+              <tr id="row1">
+                <td class="square" id="00"></td>
+                <td class="square v" id="01"></td>
+                <td class="square" id="02"></td>
+              </tr>
+              <tr id="row2">
+                <td class="square h" id="10"></td>
+                <td class="square v h" id="11"></td>
+                <td class="square h" id="12"></td>
+              </tr>
+              <tr id="row3">
+                <td class="square" id="20"></td>
+                <td class="square v" id="21"></td>
+                <td class="square" id="22"></td>
+              </tr>
+            </table>
+          </div>
       </div>
+
+      <div class="col-md-6">
+        <div class="well" id="stats">
+          <h3>Player 1's score: <span id="player1score">0</span></h3>
+          <br/><br/>
+          <h3>Player 2's score: <span id="player2score">0</span></h3>
+        </div>
+      </div>
+
+    </div>
+
 
   </div>
 </body>

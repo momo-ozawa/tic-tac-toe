@@ -8,6 +8,7 @@ function convertValueToIntArray(value) {
   );
 }
 
+
 function clearBoard() {
   $('.square').removeClass('marked');
   $('.square').text('');
@@ -39,6 +40,8 @@ $(document).ready(function() {
       // Check if game is over; if not, switch player
       if (game.isGameOver()) {
         alert(game.gameOverMessage());
+        $('span#player1score').text(game.player1.score);
+        $('span#player2score').text(game.player2.score);
         
         // Clear board in web app
         clearBoard();

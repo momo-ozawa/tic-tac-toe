@@ -6,6 +6,7 @@
 
 function Player(mark) {
   this.mark = mark;
+  this.score = 0;
 }
 
 /* SPACE */
@@ -88,6 +89,7 @@ Game.prototype.isThreeInARow = function() {
     var markSet = new Set(groups[i]);
     if (markSet.size === 1 && !(markSet.has(undefined))) {
       this.winner = getFirstElementInSet(markSet);
+      this.winner.score += 1;
       return true;
     }
   }
