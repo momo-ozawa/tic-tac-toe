@@ -106,6 +106,15 @@ describe('Game', function() {
     var testGame = new Game();
     expect(testGame.isGameOver()).to.equal(false);
   });
+
+  it("returns correct winner message", function() {
+    var testGame = new Game();
+    testGame.board.find(0,0).takenBy(testGame.player1);
+    testGame.board.find(0,1).takenBy(testGame.player1);
+    testGame.board.find(0,2).takenBy(testGame.player1);
+    testGame.threeInARow()
+    expect(testGame.winnerMessage()).to.equal('X wins!')
+  });
 });
 
 

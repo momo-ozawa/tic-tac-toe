@@ -78,11 +78,16 @@ Game.prototype.switchPlayer = function() {
   }
 }
 
+function getFirstElementInSet(set) {
+  return set.values().next().value;
+}
+
 Game.prototype.threeInARow = function() {
   var groups = this.board.groups();
   for (var i = 0; i < groups.length; i++) {
     var markSet = new Set(groups[i]);
     if (markSet.size === 1 && !(markSet.has(undefined))) {
+      this.winner = getFirstElementInSet(markSet);
       return true;
     }
   }
@@ -93,6 +98,9 @@ Game.prototype.isGameOver = function() {
   return this.threeInARow();
 }
 
+Game.prototype.winnerMessage = function() {
+  return this.winner.mark + ' wins!';
+}
 
 
 
