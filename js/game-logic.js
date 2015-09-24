@@ -100,7 +100,7 @@ Game.prototype.isAllMarked = function() {
   var groups = this.board.groups();
   // Only look at rows; looking at columns and diagonals is redundant
   // Hence, i < 3 and not i < markSet.length
-  for (var i = 0; i < 3 i++) {
+  for (var i = 0; i < 3; i++) {
     var markSet = new Set(groups[i]);
     if (markSet.has(undefined)) {
       return false;
