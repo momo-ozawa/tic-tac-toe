@@ -62,23 +62,6 @@ describe('Board', function() {
     ]
     expect(testBoard.groups()).to.eql(expectedBoardArray);
   });
-
-  it("returns true if a player has three marks in a row", function() {
-    var testBoard = new Board();
-    var testPlayer = new Player('X');
-    testBoard.find(0,0).takenBy(testPlayer);
-    testBoard.find(0,1).takenBy(testPlayer);
-    testBoard.find(0,2).takenBy(testPlayer);
-    expect(testBoard.threeInARow()).to.equal(true);
-  });
-
-  it("returns false if no player has three marks in a row", function() {
-    var testBoard = new Board();
-    var testPlayer = new Player('X');
-    testBoard.find(0,0).takenBy(testPlayer);
-    testBoard.find(0,1).takenBy(testPlayer);
-    expect(testBoard.threeInARow()).to.equal(false);
-  });
 });
 
 /* GAME */
@@ -94,6 +77,21 @@ describe('Game', function() {
     var testGame = new Game();
     testGame.switchPlayer();
     expect(testGame.currentPlayer).to.eql(testGame.player2);
+  });
+
+  it("returns true if a player has three marks in a row", function() {
+    var testGame = new Game();
+    testGame.board.find(0,0).takenBy(testGame.player1);
+    testGame.board.find(0,1).takenBy(testGame.player1);
+    testGame.board.find(0,2).takenBy(testGame.player1);
+    expect(testGame.threeInARow()).to.equal(true);
+  });
+
+  it("returns false if no player has three marks in a row", function() {
+    var testGame = new Game();
+    testGame.board.find(0,0).takenBy(testGame.player1);
+    testGame.board.find(0,1).takenBy(testGame.player1);
+    expect(testGame.threeInARow()).to.equal(false);
   });
 
   it("returns true if game is over", function() {

@@ -60,17 +60,6 @@ Board.prototype.groups = function() {
   return groups;
 }
 
-Board.prototype.threeInARow = function() {
-  var groups = this.groups();
-  for (var i = 0; i < groups.length; i++) {
-    var markSet = new Set(groups[i]);
-    if (markSet.size === 1 && !(markSet.has(undefined))) {
-      return true;
-    }
-  }
-  return false;
-}
-
 /* GAME*/
 
 function Game() {
@@ -89,8 +78,19 @@ Game.prototype.switchPlayer = function() {
   }
 }
 
+Game.prototype.threeInARow = function() {
+  var groups = this.board.groups();
+  for (var i = 0; i < groups.length; i++) {
+    var markSet = new Set(groups[i]);
+    if (markSet.size === 1 && !(markSet.has(undefined))) {
+      return true;
+    }
+  }
+  return false;
+}
+
 Game.prototype.isGameOver = function() {
-  return this.board.threeInARow();
+  return this.threeInARow();
 }
 
 
