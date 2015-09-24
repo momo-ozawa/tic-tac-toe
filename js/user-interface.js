@@ -33,7 +33,7 @@ $(document).ready(function() {
 
       // Check if game is over; if not, switch player
       if (game.isGameOver()) {
-        alert('Woo!');
+        alert(game.winnerMessage());
       } else {
         game.switchPlayer();
       }
