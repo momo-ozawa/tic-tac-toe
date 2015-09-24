@@ -45,7 +45,7 @@ function computerTakesATurn(currentGame) {
 }
 
 function showWhosTurn(currentGame) {
-  $('span#commentary').text(currentGame.currentPlayer.mark + "'s turn.").show();
+  $('span#commentary').text(currentGame.currentPlayer.mark + "'s turn.").hide().delay(300).fadeIn();
 }
 
 function markSpaceAsTaken(currentGame, squareId) {
@@ -66,8 +66,8 @@ function gameOverActions(currentGame) {
   alert(currentGame.gameOverMessage());
 
   // Update scores
-  $('span#player1score').text(currentGame.player1.score);
-  $('span#player2score').text(currentGame.player2.score);
+  $('span#player1score').text(currentGame.player1.score).hide().fadeIn();
+  $('span#player2score').text(currentGame.player2.score).hide().fadeIn();
   
   // Clear board in web app
   clearBoard();
@@ -102,13 +102,11 @@ $(document).ready(function() {
 
     // Initialize a new game
     var game = new Game(mode);
-    console.log(game)
 
     showWhosTurn(game);
 
     if (mode === 'Player vs. Computer') {
       $('.square').click(function() {
-        console.log(game.currentPlayer);
         if (game.currentPlayer === game.player1) {
           playerTakesATurn(game, $(this));
         }
@@ -118,6 +116,10 @@ $(document).ready(function() {
         if (game.currentPlayer === game.player2) {
           computerTakesATurn(game);
         }
+      });
+    } else {
+      $('.square').click(function() {
+        playerTakesATurn(game, $(this));
       });
     }
 
