@@ -66,8 +66,8 @@ function Game() {
   this.board = new Board();
   this.player1 = new Player('X');
   this.player2 = new Player('O');
+  this.currentPlayer = this.player1;
   this.winner = undefined;
-  this.currentPlayer = this.player1; 
 }
 
 Game.prototype.switchPlayer = function() {
@@ -116,6 +116,21 @@ Game.prototype.gameOverMessage = function() {
   } else {
     return this.winner.mark + ' wins!';
   }
+}
+
+Game.prototype.newRound = function() {
+  // Reset board
+  this.board = new Board();
+
+  // Loser gets to go first; if it was a tie game, player1 defaults to going first
+  if (this.winner !== undefined) {
+    this.switchPlayer();
+  } else {
+    this.currentPlayer = this.player1; 
+  }
+
+  // Reset winner
+  this.winner = undefined;
 }
 
 

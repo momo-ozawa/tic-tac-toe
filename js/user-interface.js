@@ -8,6 +8,11 @@ function convertValueToIntArray(value) {
   );
 }
 
+function clearBoard() {
+  $('.square').removeClass('marked');
+  $('.square').text('');
+}
+
 /**
  * JQUERY
  */
@@ -34,6 +39,13 @@ $(document).ready(function() {
       // Check if game is over; if not, switch player
       if (game.isGameOver()) {
         alert(game.gameOverMessage());
+        
+        // Clear board in web app
+        clearBoard();
+
+        // Start new round
+        game.newRound();
+
       } else {
         game.switchPlayer();
       }
