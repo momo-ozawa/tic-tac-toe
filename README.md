@@ -2,9 +2,6 @@
 
 ##### Play Tic Tac Toe. Date of current version: 09/23/15
 
-## Description
-_99 bottles of beer on the wall, 99 bottles of beer. Take one down and pass it around, 98 bottles of beer on the wall._
-
 
 ## Setup
 Clone this git repository on your computer 
