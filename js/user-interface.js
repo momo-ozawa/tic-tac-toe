@@ -20,13 +20,12 @@ $(document).ready(function() {
   $('.square').click(function() {
     if (!($(this).hasClass('marked'))) {
       // Mark space in game.board as taken by current player
-      var selectedSquare = $('this').attr('id');
-      console.log(selectedSquare);
-      // var coordinates = convertValueToIntArray(selectedSquare);
-      // var xCoordinate = coordinates[0];
-      // var yCoordinate = coordinates[1];
-      // game.board.find(xCoordinate, yCoordinate).takenBy(game.currentPlayer);
-      // console.log(game.board.groups());
+      var selectedSquare = $(this).attr('id');
+      var coordinates = convertValueToIntArray(selectedSquare);
+      var xCoordinate = coordinates[0];
+      var yCoordinate = coordinates[1];
+      game.board.find(xCoordinate, yCoordinate).takenBy(game.currentPlayer);
+      console.log(game.board.groups());
 
       // Mark a square on the web app
       $(this).text(game.currentPlayer.mark);
