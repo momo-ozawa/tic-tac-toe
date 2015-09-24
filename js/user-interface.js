@@ -31,8 +31,12 @@ $(document).ready(function() {
       $(this).text(game.currentPlayer.mark);
       $(this).addClass('marked');
 
-      // Switch player
-      game.switchPlayer();
+      // Check if game is over; if not, switch player
+      if (game.isGameOver()) {
+        alert('Woo!');
+      } else {
+        game.switchPlayer();
+      }
     }
   });
 });
