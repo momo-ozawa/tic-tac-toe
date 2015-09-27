@@ -15,8 +15,22 @@
 
     <!-- Put line break here for clarity -->
     <hr><br/>
+    
+    <div class="row" id="selectMode">
+      <div class="col-md-3">
+        <select name="whichMode" id="whichMode" class="form-control">
+          <option value="Player vs. Player">Player vs. Player</option>
+          <option value="Player vs. Computer">Player vs. Computer</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-info" id="modeSubmit">Let's do this!</button>
+      </div>
+    </div>
 
-    <div class="row">
+    <br/></br>
+
+    <div class="row" id="playGame">
       
       <!-- Board -->
       <div class="col-md-6">
@@ -43,13 +57,15 @@
 
       <div class="col-md-6">
         <div class="well" id="stats">
-          <h3>X's score: <span id="player1score">0</span></h3>
+          <h3>Mode: <span id="currentMode"></span></h3>
           <br/><br/>
-          <h3>O's score: <span id="player2score">0</span></h3>
+          <h4>X's score: <span id="player1score">0</span></h4>
+          <br/><br/>
+          <h4>O's score: <span id="player2score">0</span></h4>
           <br/><br/>
           <hr>
           <br/><br/>
-          <h3><span id="commentary"></span></h3>
+          <h4><span id="commentary"></span></h4>
         </div>
       </div>
 
