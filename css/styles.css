@@ -1,0 +1,37 @@
+#playGame {
+  display: none;
+}
+
+.square {
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  font-size: 400%;
+}
+
+.v {
+  border-left: 3px solid #000;
+  border-right: 3px solid #000;
+}
+
+.h {
+  border-top: 3px solid #000;
+  border-bottom: 3px solid #000;
+}
+
+.square:hover {
+  background-color: #ECEFF1;
+}
+
+#stats {
+  height: 450px;
+  text-align: center;
+}
+
+#commentary {
+  display: none;
+}
+
+#modeDisplay {
+  text-align: center;
+}
