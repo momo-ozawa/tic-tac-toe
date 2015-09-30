@@ -1,7 +1,7 @@
 # _Tic Tac Toe_
 
 ##### Play Tic Tac Toe. Date of current version: 09/23/15
-[Check out the project!](]https://momo-ozawa.github.io/tic-tac-toe/)
+https://momo-ozawa.github.io/tic-tac-toe/
 
 
 ## Setup
