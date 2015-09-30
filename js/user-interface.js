@@ -117,7 +117,8 @@ $(document).ready(function() {
 
       // Computer
       $(document).keypress(function(e) {
-        if (game.currentPlayer === game.player2) {
+        // If user pressed space bar
+        if (game.currentPlayer === game.player2 && e.keyCode == 32) {
           computerTakesATurn(game);
         }
       });
