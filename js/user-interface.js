@@ -45,7 +45,11 @@ function computerTakesATurn(currentGame) {
 }
 
 function showWhosTurn(currentGame) {
-  $('span#commentary').text(currentGame.currentPlayer.mark + "'s turn.").hide().delay(300).fadeIn();
+  var commentary = currentGame.currentPlayer.mark + "'s turn."
+  if (currentGame.mode === "Player vs. Computer" && currentGame.currentPlayer === currentGame.player2) {
+    commentary += " (Press space bar)";
+  }
+  $('span#commentary').text(commentary).hide().delay(300).fadeIn();
 }
 
 function markSpaceAsTaken(currentGame, squareId) {
@@ -117,7 +121,8 @@ $(document).ready(function() {
 
       // Computer
       $(document).keypress(function(e) {
-        if (game.currentPlayer === game.player2) {
+        // If user pressed space bar
+        if (game.currentPlayer === game.player2 && e.keyCode == 32) {
           computerTakesATurn(game);
         }
       });

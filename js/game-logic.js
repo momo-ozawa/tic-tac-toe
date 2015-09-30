@@ -90,7 +90,6 @@ function Game(mode) {
   this.mode = mode;
 }
 
-
 Game.prototype.switchPlayer = function() {
   if (this.currentPlayer === this.player1) {
     this.currentPlayer = this.player2;
