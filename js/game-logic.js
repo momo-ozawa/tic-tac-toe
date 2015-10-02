@@ -15,7 +15,7 @@ function Space(xCoordinate, yCoordinate) {
   this.xCoordinate = xCoordinate;
   this.yCoordinate = yCoordinate;
   this.markedBy = undefined;
-} 
+}
 
 Space.prototype.takenBy = function(player) {
   this.markedBy = player;
@@ -45,18 +45,18 @@ Board.prototype.groups = function() {
   var groups = [];
 
   // Add rows to groups
-  groups.push([this.find(0,0).markedBy, this.find(0,1).markedBy, this.find(0,2).markedBy]);
-  groups.push([this.find(1,0).markedBy, this.find(1,1).markedBy, this.find(1,2).markedBy]);
-  groups.push([this.find(2,0).markedBy, this.find(2,1).markedBy, this.find(2,2).markedBy]);
+  groups.push([this.find(0,0), this.find(0,1), this.find(0,2)]);
+  groups.push([this.find(1,0), this.find(1,1), this.find(1,2)]);
+  groups.push([this.find(2,0), this.find(2,1), this.find(2,2)]);
 
   // Add columns to groups
-  groups.push([this.find(0,0).markedBy, this.find(1,0).markedBy, this.find(2,0).markedBy]);
-  groups.push([this.find(0,1).markedBy, this.find(1,1).markedBy, this.find(2,1).markedBy]);
-  groups.push([this.find(0,2).markedBy, this.find(1,2).markedBy, this.find(2,2).markedBy]);
+  groups.push([this.find(0,0), this.find(1,0), this.find(2,0)]);
+  groups.push([this.find(0,1), this.find(1,1), this.find(2,1)]);
+  groups.push([this.find(0,2), this.find(1,2), this.find(2,2)]);
 
   // Add diagonals to groups
-  groups.push([this.find(0,0).markedBy, this.find(1,1).markedBy, this.find(2,2).markedBy]);
-  groups.push([this.find(2,0).markedBy, this.find(1,1).markedBy, this.find(0,2).markedBy]);
+  groups.push([this.find(0,0), this.find(1,1), this.find(2,2)]);
+  groups.push([this.find(2,0), this.find(1,1), this.find(0,2)]);
 
   return groups;
 }
@@ -98,6 +98,17 @@ Game.prototype.switchPlayer = function() {
   }
 }
 
+// /* Find and return a 'winning' space*/
+// Game.prototype.findWinningSpace = function(player) {
+//   oneAwayFromWinning = [player, player, undefined];
+//   var groups = this.board.groups();
+//   for (var i = 0; i < groups.length; i++) {
+//     if (_.isEqual(oneAwayFromWinning, groups[i].sort())) {
+//
+//     }
+//   }
+// }
+
 function getFirstElementInSet(set) {
   return set.values().next().value;
 }
@@ -105,7 +116,8 @@ function getFirstElementInSet(set) {
 Game.prototype.isThreeInARow = function() {
   var groups = this.board.groups();
   for (var i = 0; i < groups.length; i++) {
-    var markSet = new Set(groups[i]);
+    var markArray = groups[i].map(space => space.markedBy);
+    var markSet = new Set(markArray);
     if (markSet.size === 1 && !(markSet.has(undefined))) {
       this.winner = getFirstElementInSet(markSet);
       this.winner.score += 1;
@@ -140,15 +152,9 @@ Game.prototype.newRound = function() {
   if (this.winner !== undefined) {
     this.switchPlayer();
   } else {
-    this.currentPlayer = this.player1; 
+    this.currentPlayer = this.player1;
   }
 
   // Reset winner
   this.winner = undefined;
 }
-
-
-
-
-
-
