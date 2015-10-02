@@ -116,7 +116,8 @@ function getFirstElementInSet(set) {
 Game.prototype.isThreeInARow = function() {
   var groups = this.board.groups();
   for (var i = 0; i < groups.length; i++) {
-    var markSet = new Set(groups[i].map(space => space.markedBy));
+    var markArray = groups[i].map(space => space.markedBy);
+    var markSet = new Set(markArray);
     if (markSet.size === 1 && !(markSet.has(undefined))) {
       this.winner = getFirstElementInSet(markSet);
       this.winner.score += 1;
