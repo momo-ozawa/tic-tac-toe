@@ -93,6 +93,20 @@ describe('Game', function() {
     expect(testGame.currentPlayer).to.eql(testGame.player2);
   });
 
+  it("'Game.findWinningSpace(player)' returns winning space if one exists for a player", function() {
+    var testGame = new Game();
+    testGame.board.find(0,0).takenBy(testGame.player1);
+    testGame.board.find(0,1).takenBy(testGame.player1);
+    expect(testGame.findWinningSpace(testGame.player1)).to.eql(new Space(0,2));
+  });
+
+  it("'Game.findWinningSpace(player)' returns undefined if no winning spaces exist for a player", function() {
+    var testGame = new Game();
+    testGame.board.find(0,0).takenBy(testGame.player1);
+    testGame.board.find(2,1).takenBy(testGame.player1);
+    expect(testGame.findWinningSpace(testGame.player1)).to.equal(undefined);
+  });
+
   it("'Game.isThreeInARow()' returns true if a player has three marks in a row", function() {
     var testGame = new Game();
     testGame.board.find(0,0).takenBy(testGame.player1);

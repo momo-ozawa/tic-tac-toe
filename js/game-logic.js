@@ -117,8 +117,15 @@ Game.prototype.findWinningSpace = function(player) {
   }
 }
 
-function getFirstElementInSet(set) {
-  return set.values().next().value;
+Game.prototype.findWinningSpace = function(player) {
+  var groups = this.board.groups();
+  for (var i = 0; i < groups.length; i++) {
+    var markArray = groups[i].map(space => space.markedBy);
+    if (sum(markArray) === 2 && player === this.player1 ||
+        sum(markArray) === -2 && player === this.player2) {
+      return groups[i][markArray.indexOf(0)];
+    }
+  }
 }
 
 function sum(array) {
