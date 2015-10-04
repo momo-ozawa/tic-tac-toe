@@ -11,7 +11,7 @@ function playerTakesATurn(currentGame, square) {
       markSpaceAsTaken(currentGame, selectedSquareId);
 
       // Mark a square on the web app
-      square.text(currentGame.currentPlayer.mark);
+      square.text(currentGame.currentPlayer.getSymbol());
       square.addClass('marked');
 
       // Check if game is over; if not, switch player
@@ -24,16 +24,37 @@ function playerTakesATurn(currentGame, square) {
     }
 }
 
+function getSquareId(space) {
+  return space.xCoordinate.toString() + space.yCoordinate.toString();
+}
+
+function markSquare(currentGame, space) {
+  var squareId = getSquareId(space);
+  $('#' + squareId).text(currentGame.currentPlayer.getSymbol()).addClass('marked').fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(200);
+}
+
 function computerTakesATurn(currentGame) {
   var unmarkedSquares = currentGame.board.getAllUnmarked();
   var randomUnmarkedSquare = currentGame.board.getRandomUnmarkedSpace(unmarkedSquares);
+  var computerWinningSpace = currentGame.findWinningSpace(currentGame.player2);
+  var opponentWinningSpace = currentGame.findWinningSpace(currentGame.player1);
 
-  // Mark space in game.board as taken by computer
-  randomUnmarkedSquare.takenBy(currentGame.player2);
-
-  // Mark a square in the web app
-  var squareId = randomUnmarkedSquare.xCoordinate.toString() + randomUnmarkedSquare.yCoordinate.toString();
-  $('#' + squareId).text(currentGame.currentPlayer.mark).addClass('marked').fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(200);
+  if (computerWinningSpace) {
+    // Mark winning space
+    computerWinningSpace.takenBy(currentGame.player2);
+    // Mark a square in the web app
+    markSquare(currentGame, computerWinningSpace);
+  } else if (opponentWinningSpace) {
+    // Block opponent
+    opponentWinningSpace.takenBy(currentGame.player2);
+    // Mark a square in the web app
+    markSquare(currentGame, opponentWinningSpace);
+  } else {
+    // Mark random space
+    randomUnmarkedSquare.takenBy(currentGame.player2);
+    // Mark a square in the web app
+    markSquare(currentGame, randomUnmarkedSquare);
+  }
 
   // Check if game is over; if not, switch player
   if (currentGame.isGameOver()) {
@@ -45,7 +66,7 @@ function computerTakesATurn(currentGame) {
 }
 
 function showWhosTurn(currentGame) {
-  var commentary = currentGame.currentPlayer.mark + "'s turn."
+  var commentary = currentGame.currentPlayer.getSymbol() + "'s turn."
   if (currentGame.mode === "Player vs. Computer" && currentGame.currentPlayer === currentGame.player2) {
     commentary += " (Press space bar)";
   }
