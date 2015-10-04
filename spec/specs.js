@@ -78,79 +78,79 @@ describe('Board', function() {
   })
 });
 
-// /* GAME */
+/* GAME */
 
-// describe('Game', function() {
-//   it("'Game.currentPlayer' returns correct current player", function() {
-//     var testGame = new Game();
-//     var testPlayer = new Player('X');
-//     expect(testGame.currentPlayer).to.eql(testPlayer);
-//   });
+describe('Game', function() {
+  it("'Game.currentPlayer' returns correct current player", function() {
+    var testGame = new Game();
+    var testPlayer = new Player(1);
+    expect(testGame.currentPlayer).to.eql(testPlayer);
+  });
 
-//   it("'Game.switchPlayer()' switches players", function() {
-//     var testGame = new Game();
-//     testGame.switchPlayer();
-//     expect(testGame.currentPlayer).to.eql(testGame.player2);
-//   });
+  it("'Game.switchPlayer()' switches players", function() {
+    var testGame = new Game();
+    testGame.switchPlayer();
+    expect(testGame.currentPlayer).to.eql(testGame.player2);
+  });
 
-//   it("'Game.isThreeInARow()' returns true if a player has three marks in a row", function() {
-//     var testGame = new Game();
-//     testGame.board.find(0,0).takenBy(testGame.player1);
-//     testGame.board.find(0,1).takenBy(testGame.player1);
-//     testGame.board.find(0,2).takenBy(testGame.player1);
-//     expect(testGame.isThreeInARow()).to.equal(true);
-//   });
+  it("'Game.isThreeInARow()' returns true if a player has three marks in a row", function() {
+    var testGame = new Game();
+    testGame.board.find(0,0).takenBy(testGame.player1);
+    testGame.board.find(0,1).takenBy(testGame.player1);
+    testGame.board.find(0,2).takenBy(testGame.player1);
+    expect(testGame.isThreeInARow()).to.equal(true);
+  });
 
-//   it("'Game.isThreeInARow()' returns false if no player has three marks in a row", function() {
-//     var testGame = new Game();
-//     testGame.board.find(0,0).takenBy(testGame.player1);
-//     testGame.board.find(0,1).takenBy(testGame.player1);
-//     expect(testGame.isThreeInARow()).to.equal(false);
-//   });
+  it("'Game.isThreeInARow()' returns false if no player has three marks in a row", function() {
+    var testGame = new Game();
+    testGame.board.find(0,0).takenBy(testGame.player1);
+    testGame.board.find(0,1).takenBy(testGame.player1);
+    expect(testGame.isThreeInARow()).to.equal(false);
+  });
 
-//   it("'Game.isAllMarked()' returns true if everything is marked", function() {
-//     var testGame = new Game();
-//     testGame.board.find(0,0).takenBy(testGame.player1);
-//     testGame.board.find(0,1).takenBy(testGame.player2);
-//     testGame.board.find(0,2).takenBy(testGame.player1);
-//     testGame.board.find(1,0).takenBy(testGame.player2);
-//     testGame.board.find(1,1).takenBy(testGame.player1);
-//     testGame.board.find(1,2).takenBy(testGame.player2);
-//     testGame.board.find(2,0).takenBy(testGame.player1);
-//     testGame.board.find(2,1).takenBy(testGame.player2);
-//     testGame.board.find(2,2).takenBy(testGame.player1);
-//     expect(testGame.isAllMarked()).to.equal(true);
-//   });
+  it("'Game.isAllMarked()' returns true if everything is marked", function() {
+    var testGame = new Game();
+    testGame.board.find(0,0).takenBy(testGame.player1);
+    testGame.board.find(0,1).takenBy(testGame.player2);
+    testGame.board.find(0,2).takenBy(testGame.player1);
+    testGame.board.find(1,0).takenBy(testGame.player2);
+    testGame.board.find(1,1).takenBy(testGame.player1);
+    testGame.board.find(1,2).takenBy(testGame.player2);
+    testGame.board.find(2,0).takenBy(testGame.player1);
+    testGame.board.find(2,1).takenBy(testGame.player2);
+    testGame.board.find(2,2).takenBy(testGame.player1);
+    expect(testGame.isAllMarked()).to.equal(true);
+  });
 
-//   it("'Game.isAllMarked()' returns false if board still has unmarked spaces", function() {
-//     var testGame = new Game();
-//     testGame.board.find(0,0).takenBy(testGame.player1);
-//     testGame.board.find(0,1).takenBy(testGame.player1);
-//     expect(testGame.isAllMarked()).to.equal(false);
-//   });
+  it("'Game.isAllMarked()' returns false if board still has unmarked spaces", function() {
+    var testGame = new Game();
+    testGame.board.find(0,0).takenBy(testGame.player1);
+    testGame.board.find(0,1).takenBy(testGame.player1);
+    expect(testGame.isAllMarked()).to.equal(false);
+  });
 
-//   it("'Game.isGameOver()' returns true if game is over", function() {
-//     var testGame = new Game();
-//     testGame.board.find(0,0).takenBy(testGame.player1);
-//     testGame.board.find(0,1).takenBy(testGame.player1);
-//     testGame.board.find(0,2).takenBy(testGame.player1);
-//     expect(testGame.isGameOver()).to.equal(true);
-//   });
+  it("'Game.isGameOver()' returns true if game is over", function() {
+    var testGame = new Game();
+    testGame.board.find(0,0).takenBy(testGame.player1);
+    testGame.board.find(0,1).takenBy(testGame.player1);
+    testGame.board.find(0,2).takenBy(testGame.player1);
+    expect(testGame.isGameOver()).to.equal(true);
+  });
 
-//   it("'Game.isGameOver()' returns false if game is not over", function() {
-//     var testGame = new Game();
-//     expect(testGame.isGameOver()).to.equal(false);
-//   });
+  it("'Game.isGameOver()' returns false if game is not over", function() {
+    var testGame = new Game();
+    expect(testGame.isGameOver()).to.equal(false);
+  });
 
-//   it("'Game.winnerMessage()' returns correct winner message", function() {
-//     var testGame = new Game();
-//     testGame.board.find(0,0).takenBy(testGame.player1);
-//     testGame.board.find(0,1).takenBy(testGame.player1);
-//     testGame.board.find(0,2).takenBy(testGame.player1);
-//     testGame.isThreeInARow();
-//     expect(testGame.gameOverMessage()).to.equal('X wins!')
-//   });
-// });
+  it("'Game.winnerMessage()' returns correct winner message", function() {
+    var testGame = new Game();
+    testGame.board.find(0,0).takenBy(testGame.player1);
+    testGame.board.find(0,1).takenBy(testGame.player1);
+    testGame.board.find(0,2).takenBy(testGame.player1);
+    testGame.isThreeInARow();
+    expect(testGame.gameOverMessage()).to.equal('X wins!')
+  });
+});
 
 
 

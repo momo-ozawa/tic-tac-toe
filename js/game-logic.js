@@ -9,6 +9,10 @@ function Player(mark) {
   this.score = 0;
 }
 
+Player.prototype.getSymbol = function() {
+  return (this.mark === 1) ? 'X' : 'O';
+}
+
 /* SPACE */
 
 function Space(xCoordinate, yCoordinate) {
@@ -83,8 +87,8 @@ Board.prototype.getRandomUnmarkedSpace = function(unmarkedSpaceArray) {
 
 function Game(mode) {
   this.board = new Board();
-  this.player1 = new Player('X');
-  this.player2 = new Player('O');
+  this.player1 = new Player(1);
+  this.player2 = new Player(-1);
   this.currentPlayer = this.player1;
   this.winner = undefined;
   this.mode = mode;
@@ -117,13 +121,20 @@ function getFirstElementInSet(set) {
   return set.values().next().value;
 }
 
+function sum(array) {
+  var total = 0;
+  for (var i = 0; i < array.length; i ++) {
+    total += array[i];
+  }
+  return total;
+}
+
 Game.prototype.isThreeInARow = function() {
   var groups = this.board.groups();
   for (var i = 0; i < groups.length; i++) {
     var markArray = groups[i].map(space => space.markedBy);
-    var markSet = new Set(markArray);
-    if (markSet.size === 1 && !(markSet.has(undefined))) {
-      this.winner = getFirstElementInSet(markSet);
+    if (sum(markArray) === 3 || sum(markArray) === -3) {
+      this.winner = this.currentPlayer;
       this.winner.score += 1;
       return true;
     }
@@ -144,7 +155,7 @@ Game.prototype.gameOverMessage = function() {
   if (this.winner === undefined) {
     return 'Tie game!';
   } else {
-    return this.winner.mark + ' wins!';
+    return this.winner.getSymbol() + ' wins!';
   }
 }
 
