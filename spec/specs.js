@@ -33,53 +33,50 @@ describe('Space', function() {
   });
 });
 
-// /* BOARD */
+/* BOARD */
 
-// describe('Board', function() {
-//   it("'Board()' creates 9 spaces when initialized", function() {
-//     var testBoard = new Board();
-//     var expectedBoardArray = [
-//       [new Space(0,0), new Space(0,1), new Space(0, 2)],
-//       [new Space(1,0), new Space(1,1), new Space(1, 2)],
-//       [new Space(2,0), new Space(2,1), new Space(2, 2)]
-//     ];
-//   expect(testBoard.board).to.eql(expectedBoardArray);
-//   });
+describe('Board', function() {
+  it("'Board()' creates 9 spaces when initialized", function() {
+    var testBoard = new Board();
+    var expectedBoardArray = [
+      [new Space(0,0), new Space(0,1), new Space(0, 2)],
+      [new Space(1,0), new Space(1,1), new Space(1, 2)],
+      [new Space(2,0), new Space(2,1), new Space(2, 2)]
+    ];
+  expect(testBoard.board).to.eql(expectedBoardArray);
+  });
 
-//   it("'Board.find(x,y)' finds and returns a space by its coordinates", function() {
-//     var testBoard = new Board();
-//     expect(testBoard.find(0,0)).to.eql(new Space(0,0));
-//   });
+  it("'Board.find(x,y)' finds and returns a space by its coordinates", function() {
+    var testBoard = new Board();
+    expect(testBoard.find(0,0)).to.eql(new Space(0,0));
+  });
 
-//   it("'Board.groups()'creates and returns groups with correct info", function() {
-//     var testBoard = new Board();
-//     var testPlayer = new Player('X');
-//     testBoard.find(0,0).takenBy(testPlayer);
-//     var expectedBoardArray = [
-//       [testPlayer, undefined, undefined],
-//       [undefined, undefined, undefined],
-//       [undefined, undefined, undefined],
-//       [testPlayer, undefined, undefined],
-//       [undefined, undefined, undefined],
-//       [undefined, undefined, undefined],
-//       [testPlayer, undefined, undefined],
-//       [undefined, undefined, undefined]
-//     ]
-//     expect(testBoard.groups()).to.eql(expectedBoardArray);
-//   });
+  it("'Board.groups()'creates and returns groups with correct info", function() {
+    var testBoard = new Board();
+    var testPlayer = new Player(1);
+    testBoard.find(0,0).takenBy(testPlayer);
+    expect(testBoard.groups()[0].map(space => space.markedBy)).to.eql([1,0,0]);
+    expect(testBoard.groups()[1].map(space => space.markedBy)).to.eql([0,0,0]);
+    expect(testBoard.groups()[2].map(space => space.markedBy)).to.eql([0,0,0]);
+    expect(testBoard.groups()[3].map(space => space.markedBy)).to.eql([1,0,0]);
+    expect(testBoard.groups()[4].map(space => space.markedBy)).to.eql([0,0,0]);
+    expect(testBoard.groups()[5].map(space => space.markedBy)).to.eql([0,0,0]);
+    expect(testBoard.groups()[6].map(space => space.markedBy)).to.eql([1,0,0]);
+    expect(testBoard.groups()[7].map(space => space.markedBy)).to.eql([0,0,0]);
+  });
 
-//   it("'Board.getAllUnmarked()' returns all unmarked spaces", function() {
-//     var testBoard = new Board();
-//     expect(testBoard.getAllUnmarked().length).to.equal(9);
-//   });
+  it("'Board.getAllUnmarked()' returns all unmarked spaces", function() {
+    var testBoard = new Board();
+    expect(testBoard.getAllUnmarked().length).to.equal(9);
+  });
 
-//   it("'Board.getRandomUnmarkedSpace(array) returns an unmarked space", function() {
-//     var testBoard = new Board();
-//     var unmarkedArray = testBoard.getAllUnmarked();
-//     var randomUnmarkedSpace = testBoard.getRandomUnmarkedSpace(unmarkedArray);
-//     expect(randomUnmarkedSpace.markedBy).to.equal(undefined);
-//   })
-// });
+  it("'Board.getRandomUnmarkedSpace(array) returns an unmarked space", function() {
+    var testBoard = new Board();
+    var unmarkedArray = testBoard.getAllUnmarked();
+    var randomUnmarkedSpace = testBoard.getRandomUnmarkedSpace(unmarkedArray);
+    expect(randomUnmarkedSpace.markedBy).to.equal(0);
+  })
+});
 
 // /* GAME */
 

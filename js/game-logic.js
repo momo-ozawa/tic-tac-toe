@@ -66,7 +66,7 @@ Board.prototype.getAllUnmarked = function() {
   for (var rowIndex = 0; rowIndex < 3; rowIndex++) {
     for (var colIndex = 0; colIndex < 3; colIndex++) {
       var space = this.find(rowIndex, colIndex);
-      if (space.markedBy === undefined) {
+      if (space.markedBy === 0) {
         unmarkedSpaces.push(space);
       }
     }
