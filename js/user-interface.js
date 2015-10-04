@@ -65,12 +65,10 @@ function computerTakesATurn(currentGame) {
   }
 }
 
-function showWhosTurn(currentGame) {
-  var commentary = currentGame.currentPlayer.getSymbol() + "'s turn."
-  if (currentGame.mode === "Player vs. Computer" && currentGame.currentPlayer === currentGame.player2) {
-    commentary += " (Press space bar)";
-  }
-  $('span#commentary').text(commentary).hide().delay(300).fadeIn();
+function convertValueToIntArray(value) {
+  return value.split('').map(
+    function(n) { return parseInt(n) }
+  );
 }
 
 function markSpaceAsTaken(currentGame, squareId) {
@@ -81,10 +79,12 @@ function markSpaceAsTaken(currentGame, squareId) {
   console.log(currentGame.board.groups());
 }
 
-function convertValueToIntArray(value) {
-  return value.split('').map(
-    function(n) { return parseInt(n) }
-  );
+function showWhosTurn(currentGame) {
+  var commentary = currentGame.currentPlayer.getSymbol() + "'s turn."
+  if (currentGame.mode === "Player vs. Computer" && currentGame.currentPlayer === currentGame.player2) {
+    commentary += " (Press space bar)";
+  }
+  $('span#commentary').text(commentary).hide().delay(300).fadeIn();
 }
 
 function gameOverActions(currentGame) {
@@ -117,7 +117,6 @@ function displayMode(mode) {
  */
  
 $(document).ready(function() {
-
   var mode;
   var currentPlayer; 
 
@@ -129,7 +128,6 @@ $(document).ready(function() {
 
     // Initialize a new game
     var game = new Game(mode);
-
     showWhosTurn(game);
 
     if (mode === 'Player vs. Computer') {   
@@ -139,7 +137,6 @@ $(document).ready(function() {
           playerTakesATurn(game, $(this));
         }
       });
-
       // Computer
       $(document).keypress(function(e) {
         // If user pressed space bar
@@ -152,7 +149,5 @@ $(document).ready(function() {
         playerTakesATurn(game, $(this));
       });
     }
-
   });
-
 });
