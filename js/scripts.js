@@ -5,12 +5,10 @@
 /* PLAYER */
 
 function Player(mark) {
+  // Mark can either be 1 or -1
+  // 1 = first player, -1 = second
   this.mark = mark;
   this.score = 0;
-}
-
-Player.prototype.getSymbol = function() {
-  return (this.mark === 1) ? 'X' : 'O';
 }
 
 /* SPACE */
@@ -18,11 +16,11 @@ Player.prototype.getSymbol = function() {
 function Space(xCoordinate, yCoordinate) {
   this.xCoordinate = xCoordinate;
   this.yCoordinate = yCoordinate;
-  this.markedBy = 0;
+  this.markedBy = undefined;
 }
 
 Space.prototype.takenBy = function(player) {
-  this.markedBy = player.mark;
+  this.markedBy = player;
 }
 
 /* BOARD */
@@ -70,7 +68,7 @@ Board.prototype.getAllUnmarked = function() {
   for (var rowIndex = 0; rowIndex < 3; rowIndex++) {
     for (var colIndex = 0; colIndex < 3; colIndex++) {
       var space = this.find(rowIndex, colIndex);
-      if (space.markedBy === 0) {
+      if (space.markedBy === undefined) {
         unmarkedSpaces.push(space);
       }
     }
@@ -87,8 +85,8 @@ Board.prototype.getRandomUnmarkedSpace = function(unmarkedSpaceArray) {
 
 function Game(mode) {
   this.board = new Board();
-  this.player1 = new Player(1);
-  this.player2 = new Player(-1);
+  this.player1 = new Player('X');
+  this.player2 = new Player('O');
   this.currentPlayer = this.player1;
   this.winner = undefined;
   this.mode = mode;
@@ -108,40 +106,25 @@ Game.prototype.findWinningSpace = function(player) {
   var groups = this.board.groups();
   for (var i = 0; i < groups.length; i++) {
     // We need to sort the array in order to use lodash.js deep comparison
-    var playerArray = groups[i].map(space => space.markedBy);
-    var sortedPlayerArray = playerArray.slice().sort();
-    if (_.isEqual(oneAwayFromWinning, sortedPlayerArray)) {
-      var unmarkedIndex = playerArray.indexOf(undefined);
-      return groups[i][unmarkedIndex];
+    var playerArray = groups[i].map(space => space.markedBy).sort();
+    if (_.isEqual(oneAwayFromWinning, playerArray)) {
+      // When we sort an array undefined winds up at the last index
+      var unmarkedSpace groups[i].filter( function(space) { return space.markedBy === undefined })
     }
   }
 }
 
-Game.prototype.findWinningSpace = function(player) {
-  var groups = this.board.groups();
-  for (var i = 0; i < groups.length; i++) {
-    var markArray = groups[i].map(space => space.markedBy);
-    if (sum(markArray) === 2 && player === this.player1 ||
-        sum(markArray) === -2 && player === this.player2) {
-      return groups[i][markArray.indexOf(0)];
-    }
-  }
-}
-
-function sum(array) {
-  var total = 0;
-  for (var i = 0; i < array.length; i ++) {
-    total += array[i];
-  }
-  return total;
+function getFirstElementInSet(set) {
+  return set.values().next().value;
 }
 
 Game.prototype.isThreeInARow = function() {
   var groups = this.board.groups();
   for (var i = 0; i < groups.length; i++) {
     var markArray = groups[i].map(space => space.markedBy);
-    if (sum(markArray) === 3 || sum(markArray) === -3) {
-      this.winner = this.currentPlayer;
+    var markSet = new Set(markArray);
+    if (markSet.size === 1 && !(markSet.has(undefined))) {
+      this.winner = getFirstElementInSet(markSet);
       this.winner.score += 1;
       return true;
     }
@@ -162,7 +145,7 @@ Game.prototype.gameOverMessage = function() {
   if (this.winner === undefined) {
     return 'Tie game!';
   } else {
-    return this.winner.getSymbol() + ' wins!';
+    return this.winner.mark + ' wins!';
   }
 }
 

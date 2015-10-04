@@ -2,8 +2,18 @@
 
 describe('Player', function() {
   it("'Player.mark' returns the player's mark", function() {
-    var testPlayer = new Player('X');
-    expect(testPlayer.mark).to.equal('X');
+    var testPlayer = new Player(1);
+    expect(testPlayer.mark).to.equal(1);
+  });
+
+  it("'Player.getSymbol()' returns an 'X' for Player(1)", function() {
+    var testPlayer = new Player(1);
+    expect(testPlayer.getSymbol()).to.equal('X');
+  });
+
+  it("'Player.getSymbol()' returns an 'O' for Player(-1)", function() {
+    var testPlayer = new Player(-1);
+    expect(testPlayer.getSymbol()).to.equal('O');
   });
 });
 
@@ -20,11 +30,16 @@ describe('Space', function() {
     expect(testSpace.yCoordinate).to.equal(2);
   });
 
+  it("'Space.takenBy' returns the spaces's mark", function() {
+    var testSpace = new Space(1,2);
+    expect(testSpace.markedBy).to.equal(0);
+  });
+
   it("'Space.takenBy(Player)' lets a player mark a space", function() {
-    var testPlayer = new Player('X');
+    var testPlayer = new Player(1);
     var testSpace = new Space(1,2);
     testSpace.takenBy(testPlayer);
-    expect(testSpace.markedBy).to.eql(testPlayer);
+    expect(testSpace.markedBy).to.eql(1);
   });
 });
 
@@ -48,19 +63,16 @@ describe('Board', function() {
 
   it("'Board.groups()'creates and returns groups with correct info", function() {
     var testBoard = new Board();
-    var testPlayer = new Player('X');
+    var testPlayer = new Player(1);
     testBoard.find(0,0).takenBy(testPlayer);
-    var expectedBoardArray = [
-      [testPlayer, undefined, undefined],
-      [undefined, undefined, undefined],
-      [undefined, undefined, undefined],
-      [testPlayer, undefined, undefined],
-      [undefined, undefined, undefined],
-      [undefined, undefined, undefined],
-      [testPlayer, undefined, undefined],
-      [undefined, undefined, undefined]
-    ]
-    expect(testBoard.groups()).to.eql(expectedBoardArray);
+    expect(testBoard.groups()[0].map(space => space.markedBy)).to.eql([1,0,0]);
+    expect(testBoard.groups()[1].map(space => space.markedBy)).to.eql([0,0,0]);
+    expect(testBoard.groups()[2].map(space => space.markedBy)).to.eql([0,0,0]);
+    expect(testBoard.groups()[3].map(space => space.markedBy)).to.eql([1,0,0]);
+    expect(testBoard.groups()[4].map(space => space.markedBy)).to.eql([0,0,0]);
+    expect(testBoard.groups()[5].map(space => space.markedBy)).to.eql([0,0,0]);
+    expect(testBoard.groups()[6].map(space => space.markedBy)).to.eql([1,0,0]);
+    expect(testBoard.groups()[7].map(space => space.markedBy)).to.eql([0,0,0]);
   });
 
   it("'Board.getAllUnmarked()' returns all unmarked spaces", function() {
@@ -72,7 +84,7 @@ describe('Board', function() {
     var testBoard = new Board();
     var unmarkedArray = testBoard.getAllUnmarked();
     var randomUnmarkedSpace = testBoard.getRandomUnmarkedSpace(unmarkedArray);
-    expect(randomUnmarkedSpace.markedBy).to.equal(undefined);
+    expect(randomUnmarkedSpace.markedBy).to.equal(0);
   })
 });
 
@@ -81,7 +93,7 @@ describe('Board', function() {
 describe('Game', function() {
   it("'Game.currentPlayer' returns correct current player", function() {
     var testGame = new Game();
-    var testPlayer = new Player('X');
+    var testPlayer = new Player(1);
     expect(testGame.currentPlayer).to.eql(testPlayer);
   });
 
@@ -89,6 +101,20 @@ describe('Game', function() {
     var testGame = new Game();
     testGame.switchPlayer();
     expect(testGame.currentPlayer).to.eql(testGame.player2);
+  });
+
+  it("'Game.findWinningSpace(player)' returns winning space if one exists for a player", function() {
+    var testGame = new Game();
+    testGame.board.find(0,0).takenBy(testGame.player1);
+    testGame.board.find(0,1).takenBy(testGame.player1);
+    expect(testGame.findWinningSpace(testGame.player1)).to.eql(new Space(0,2));
+  });
+
+  it("'Game.findWinningSpace(player)' returns undefined if no winning spaces exist for a player", function() {
+    var testGame = new Game();
+    testGame.board.find(0,0).takenBy(testGame.player1);
+    testGame.board.find(2,1).takenBy(testGame.player1);
+    expect(testGame.findWinningSpace(testGame.player1)).to.equal(undefined);
   });
 
   it("'Game.isThreeInARow()' returns true if a player has three marks in a row", function() {
