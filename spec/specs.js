@@ -5,6 +5,16 @@ describe('Player', function() {
     var testPlayer = new Player(1);
     expect(testPlayer.mark).to.equal(1);
   });
+
+  it("'Player.getSymbol()' returns an 'X' for Player(1)", function() {
+    var testPlayer = new Player(1);
+    expect(testPlayer.getSymbol()).to.equal('X');
+  });
+
+  it("'Player.getSymbol()' returns an 'O' for Player(-1)", function() {
+    var testPlayer = new Player(-1);
+    expect(testPlayer.getSymbol()).to.equal('O');
+  });
 });
 
 /* SPACE */
