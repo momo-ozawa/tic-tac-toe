@@ -14,11 +14,11 @@ function Player(mark) {
 function Space(xCoordinate, yCoordinate) {
   this.xCoordinate = xCoordinate;
   this.yCoordinate = yCoordinate;
-  this.markedBy = undefined;
+  this.markedBy = 0;
 }
 
 Space.prototype.takenBy = function(player) {
-  this.markedBy = player;
+  this.markedBy = player.mark;
 }
 
 /* BOARD */
