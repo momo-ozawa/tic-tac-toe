@@ -11,7 +11,7 @@ function playerTakesATurn(currentGame, square) {
       markSpaceAsTaken(currentGame, selectedSquareId);
 
       // Mark a square on the web app
-      square.text(currentGame.currentPlayer.mark);
+      square.text(currentGame.currentPlayer.getSymbol());
       square.addClass('marked');
 
       // Check if game is over; if not, switch player
@@ -33,7 +33,7 @@ function computerTakesATurn(currentGame) {
 
   // Mark a square in the web app
   var squareId = randomUnmarkedSquare.xCoordinate.toString() + randomUnmarkedSquare.yCoordinate.toString();
-  $('#' + squareId).text(currentGame.currentPlayer.mark).addClass('marked').fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(200);
+  $('#' + squareId).text(currentGame.currentPlayer.getSymbol()).addClass('marked').fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(200);
 
   // Check if game is over; if not, switch player
   if (currentGame.isGameOver()) {
@@ -45,7 +45,7 @@ function computerTakesATurn(currentGame) {
 }
 
 function showWhosTurn(currentGame) {
-  var commentary = currentGame.currentPlayer.mark + "'s turn."
+  var commentary = currentGame.currentPlayer.getSymbol() + "'s turn."
   if (currentGame.mode === "Player vs. Computer" && currentGame.currentPlayer === currentGame.player2) {
     commentary += " (Press space bar)";
   }
