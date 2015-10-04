@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tic Tac Toe</title>
+  <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+  <link rel="stylesheet" href="css/styles.css" type="text/css">
+  <script src="js/jquery-1.11.3.js"></script>
+  <script src="js/game-logic.js"></script>
+  <script src="js/user-interface.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Tic Tac Toe</h1>
+
+    <!-- Put line break here for clarity -->
+    <hr><br/>
+    
+    <div class="row" id="selectMode">
+      <div class="col-md-3">
+        <select name="whichMode" id="whichMode" class="form-control">
+          <option value="Player vs. Player">Player vs. Player</option>
+          <option value="Player vs. Computer">Player vs. Computer</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-info" id="modeSubmit">Let's do this!</button>
+      </div>
+    </div>
+
+    <br/></br>
+
+    <div class="row" id="playGame">
+      
+      <!-- Board -->
+      <div class="col-md-6">
+        <div id="board">
+            <table>
+              <tr id="row1">
+                <td class="square" id="00"></td>
+                <td class="square v" id="01"></td>
+                <td class="square" id="02"></td>
+              </tr>
+              <tr id="row2">
+                <td class="square h" id="10"></td>
+                <td class="square v h" id="11"></td>
+                <td class="square h" id="12"></td>
+              </tr>
+              <tr id="row3">
+                <td class="square" id="20"></td>
+                <td class="square v" id="21"></td>
+                <td class="square" id="22"></td>
+              </tr>
+            </table>
+          </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="well" id="stats">
+          <h3>Mode: <span id="currentMode"></span></h3>
+          <br/><br/>
+          <h4>X's score: <span id="player1score">0</span></h4>
+          <br/><br/>
+          <h4>O's score: <span id="player2score">0</span></h4>
+          <br/><br/>
+          <hr>
+          <br/><br/>
+          <h4><span id="commentary"></span></h4>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</body>
+</html>
