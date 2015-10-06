@@ -102,21 +102,6 @@ Game.prototype.switchPlayer = function() {
   }
 }
 
-/* Find and return a 'winning' space for player */
-Game.prototype.findWinningSpace = function(player) {
-  oneAwayFromWinning = [player, player, undefined];
-  var groups = this.board.groups();
-  for (var i = 0; i < groups.length; i++) {
-    // We need to sort the array in order to use lodash.js deep comparison
-    var playerArray = groups[i].map(space => space.markedBy);
-    var sortedPlayerArray = playerArray.slice().sort();
-    if (_.isEqual(oneAwayFromWinning, sortedPlayerArray)) {
-      var unmarkedIndex = playerArray.indexOf(undefined);
-      return groups[i][unmarkedIndex];
-    }
-  }
-}
-
 Game.prototype.findWinningSpace = function(player) {
   var groups = this.board.groups();
   for (var i = 0; i < groups.length; i++) {
