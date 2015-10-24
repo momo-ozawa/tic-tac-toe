@@ -1,4 +1,4 @@
-# Tic Tac Toe
+# _Tic Tac Toe_
 
 ##### _Personal project:_ Play Tic Tac Toe [here](https://momo-ozawa.github.io/tic-tac-toe/)!
 
