@@ -1,7 +1,6 @@
 # _Tic Tac Toe_
 
-##### Play Tic Tac Toe. Date of current version: 09/23/15
-https://momo-ozawa.github.io/tic-tac-toe/
+##### _Personal project:_ Play Tic Tac Toe [here](https://momo-ozawa.github.io/tic-tac-toe/)!
 
 
 ## Setup
@@ -20,9 +19,9 @@ Open this project in your browser by running
 open tic-tac-toe.html
 ```
 
-
-## Languages/Libraries Used
-* JavaScript, jQuery, Mocha.js, Chai.js, HTML5, CSS3
+## Technologies Used
+* JavaScript, jQuery, HTML5, CSS3
+* Mocha.js, Chai.js
 
 ## Legal
 Copyright (c) 2015 _**Momo Ozawa**_
