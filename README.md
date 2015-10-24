@@ -1,4 +1,4 @@
-# _Tic Tac Toe_
+# Tic Tac Toe
 
 ##### _Personal project:_ Play Tic Tac Toe [here](https://momo-ozawa.github.io/tic-tac-toe/)!
 
@@ -24,7 +24,7 @@ open tic-tac-toe.html
 * Mocha.js, Chai.js
 
 ## Legal
-Copyright (c) 2015 _**Momo Ozawa**_
+Copyright (c) 2015 **Momo Ozawa**
 
 This software is licensed under the MIT license.
 
